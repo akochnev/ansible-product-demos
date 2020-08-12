@@ -1,6 +1,6 @@
 ---
 - name: build openscap report for rhel7
-  hosts: web
+  hosts: "{{ HOSTS | default('web') }}"
   gather_facts: false
 
   vars:
