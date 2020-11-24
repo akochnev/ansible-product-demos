@@ -1,7 +1,7 @@
 ---
 - name: build openscap report for rhel7
   hosts: "{{ HOSTS | default('web') }}"
-  gather_facts: false
+  gather_facts: true
 
   vars:
     file_path: "/var/www/html/openscap/"
@@ -16,6 +16,10 @@
           - scap-security-guide
         state: present
 
+    - name : Output os version 
+      debug:
+        msg: "ansible_distribution={{ansible_distribution}}, ansible_distribution_version={{ansible_distribution_version}}"
+
     - name: Check if  SCAP Security Guide (SSG) profile is available
       stat:
         path: "{{ssg_schema_rhel7}}"
@@ -25,10 +29,6 @@
       stat:
         path: "{{ssg_schema_rhel8}}"
       when: ansible_distribution == 'RedHat' and ansible_distribution_version == '8.3'  
-
-    - name : Output os version 
-      debug:
-        msg: "ansible_distribution={{ansible_distribution}}, ansible_distribution_version={{ansible_distribution_version}}"
 
 
     - name: create HTML report
