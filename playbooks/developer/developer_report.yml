@@ -4,7 +4,7 @@
   gather_facts: true
 
 - name: build developer report
-  hosts: node1
+  hosts: "{{ HOSTS | default('web') }}"
   gather_facts: false
 
   vars:
