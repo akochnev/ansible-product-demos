@@ -18,7 +18,13 @@
 
     - name: Check if  SCAP Security Guide (SSG) profile is available
       stat:
-        path: "{{ssg_schema}}"
+        path: "{{ssg_schema_rhel7}}"
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version == '7.9'  
+
+    - name: Check if  SCAP Security Guide (SSG) profile is available
+      stat:
+        path: "{{ssg_schema_rhel8}}"
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version == '8.3'  
 
     - name : Output os version 
       debug:
