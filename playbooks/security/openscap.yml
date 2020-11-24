@@ -29,14 +29,14 @@
       command: "oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard --results report.xml --report index.html {{ssg_schema_rhel7}}"
       register: command_result
       failed_when: "'Error' in command_result.stderr"
-      when: ansible_distribution == 'Red Hat Enterprise Linux' and ansible_distribution_version == '7.9'
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version == '7.9'
 
 
     - name: create HTML report
       command: "oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_standard --results report.xml --report index.html {{ssg_schema_rhel8}}"
       register: command_result
       failed_when: "'Error' in command_result.stderr"
-      when: ansible_distribution == 'Red Hat Enterprise Linux' and ansible_distribution_version == '8.3'
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version == '8.3'
 
     - name: Create directory if it does falset exist
       become: true
